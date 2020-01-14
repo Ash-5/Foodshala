@@ -19,67 +19,59 @@
         }    
         
     ?>
-    
+
 </head>
 
 <body>
-    <div class="container">
-        <div class="row float-center">
-            <div class="col-lg-12">
-                <?php 
-                $result = getProducts($conn);
-                // var_dump($result);
-                $products = [];
-                while($row = mysqli_fetch_assoc($result)) {
-                    if(array_key_exists($row["category"], $products)){
-                        $products[$row["category"]][$row["id"]] = $row;
-                    } else {
-                        $products[$row["category"]] = [$row["id"] => $row];
-                    }
-                }
-                foreach($products as $category => $categoryProducts) { ?>
-                <div class='col-lg-12'>
-                    <div class='text-center'>
-                        <h3 class='text-danger'><?php echo $category ?> </h3>
-                    </div>
-                    <?php
-                    foreach ($categoryProducts as $id => $product) {
-                        $name = $product["name"];
-                        $desc = $product["description"];
-                        $image = $product["image"];
-                        $price = $product['price'];
-                        ?>
-                        <div class="card mb-3 col-lg-12 pl-0 pr-0">
-                                <div class="card-header">
-                                    <?php echo $name ?> - <b>The Cafe</b>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <img src="./<?php echo $image; ?> " height="300" width="200">
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <p class="card-text"><?php echo $desc ?></p>
-                                        </div>
-                                    </div>
-                                    <form action="home.php" method="POST">
-                                    <input type="submit" value="Add to cart" name="submit">
-                                    </form>
-                                    <b class="float-left"> Rs. <?php echo $price ?> </b>
-                                </div>
-                            </div>
-                    <?php
-                    }
-                    echo "</div>";
-                }
-                ?>
+    <?php 
+    require_once "navbar.php";
+    $result = getProducts($conn);
+    // var_dump($result);
+    $products = [];
+    while($row = mysqli_fetch_assoc($result)) {
+        if(array_key_exists($row["category"], $products)){
+            $products[$row["category"]][$row["id"]] = $row;
+        } else {
+            $products[$row["category"]] = [$row["id"] => $row];
+        }
+    }
+    foreach($products as $category => $categoryProducts) { ?>
+    <div class='col-lg-12'>
+        <div class='text-center'>
+            <h3 class='text-danger'><?php echo $category ?> </h3>
+        </div>
+    </div>
+    <div>
+    <div class="row">
+        <?php
+        foreach ($categoryProducts as $id => $product) {
+            $name = $product["name"];
+            $desc = $product["description"];
+            $image = $product["image"];
+            $price = $product['price'];
+        ?>
+        <div class="card mb-3 col-lg-3 pl-0 pr-0">
+            <div class="card-header">
+                <?php echo $name ?> - <b>The Cafe</b>
+            </div>
+            <div class="card-body">
+                <img src="./<?php echo $image; ?> " width="100%">
+                <p class="card-text mt-3"><?php echo $desc ?></p>
+                <form action="home.php" method="POST">
+                    <input type="submit" value="Add to cart" name="submit">
+                </form>
+                <b class="float-left"> Rs. <?php echo $price ?> </b>
             </div>
         </div>
+        <?php } ?>
+    </div>
+    <?php } ?>
 </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
-        integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
-    </script>
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+    integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+</script>
+
 </html>

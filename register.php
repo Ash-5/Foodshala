@@ -1,6 +1,6 @@
 <?php
-    // require_once "middleware.php";
-    // checkLogin();
+    require_once "middleware.php";
+    checkLogin();
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +22,7 @@
 <body>
 <div class="container">
     <div class="row">
+    <?php require_once "navbar.php" ?>
       <div class="col-lg-7 col-xl-9 mx-auto">
         <div class="card card-signin flex-row my-5">
           <div class="card-body">
@@ -50,11 +51,9 @@
               </div>
               <hr>
               <div class="form-group">
-                <label for="category">Select Category</label>
-                <select name="role" class="form-control" id="type">
-                  <option value="admin">Administator</option>
-                  <option value="customer">Customer</option>
-                  <option value="restroowner">Restaurant Owner</option>
+                <label for="category"></label>
+                <select hidden name="role" class="form-control" id="type">
+                  <option  value="user"> user</option>
                 </select>
               </div>
               <hr>
@@ -72,7 +71,6 @@
               </div>
               <hr>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="submit" value="Add Yourself" >Register</button>
-              <a class="d-block text-center mt-2 small" href="#">Sign In</a>
               <hr class="my-4">
             </form>
           </div>

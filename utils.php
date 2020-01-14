@@ -17,7 +17,8 @@ function checkRoute($page) {
 
 function getUIDBySessionId($conn) {
     if(array_key_exists("sessionId", $_COOKIE)) {
-        $result = mysqli_fetch_assoc(mysqli_query($conn, "select user_id from session"));
+        $sessionId = $_COOKIE["sessionId"];
+        $result = mysqli_fetch_assoc(mysqli_query($conn, "select user_id from session where id = '$sessionId'"));
         return $result["user_id"];
     }
     return null;

@@ -13,7 +13,7 @@ function checkLogin() {
         $user = mysqli_fetch_assoc(mysqli_query($conn, "select * from users where id = '$uid'"));
         $milliseconds = (string) round(microtime(true) * 1000);
         if(!($expiry > $milliseconds && checkAccess($user["role"]))) {
-            if(checkRoute("login")) {
+            if(!checkRoute("login")) {
                 gotoRoute("login");
             }
         } else {

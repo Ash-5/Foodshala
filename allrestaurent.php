@@ -16,12 +16,15 @@
         <div class="row float-center">
             <div class="col-lg-12">
                 <?php 
+                require_once "navbar.php";
+
                 $result = getAllRestaurant($conn);
+                // var_dump($result);
                 $restaurants = [];
                 while($row = mysqli_fetch_assoc($result)) {
                     array_push($restaurants, $row);
                 }
-                var_dump($restaurants);
+                //var_dump($restaurants);
                 foreach($restaurants as $index => $restaurant) { 
                 ?>
                 <div class='col-lg-12'>
@@ -30,18 +33,18 @@
                     $desc = $restaurant["bio"];
                     $image = $restaurant["logo"];
                     ?>
-                    <div class="card mb-3 col-lg-12 pl-0 pr-0">
+                    <div class="card mb-3 col-lg-12 pl-0 pr-0 border mt-3">
                         <div class="card-header">
                             <?php echo $name ?>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <img src="./<?php echo $image ?> " height="300" width="200">
-                            </div>
-                            <div class="col-lg-10">
-                                <p class="card-text"><?php echo $desc ?></p>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <img src="./<?php echo $image ?> " height="100" width="150">
+                                </div>
+                                <div class="col-lg-9">
+                                    <p class="card-text"><?php echo $desc ?></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -50,7 +53,7 @@
                     }
                 ?>
             </div>
-            <a class="btn btn-primary" href="addrestaurant.php" role="button"> Add a restaurant
+            <a class="btn btn-primary" href="addrestaurant.php" role="button"> Add a restaurant </a>
         </div>
     </div>
 </body>
