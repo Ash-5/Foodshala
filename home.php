@@ -8,7 +8,18 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Document</title>
-    <?php  include "services.php" ?>
+    <?php 
+        require_once "services.php";
+        if(array_key_exists('submit', $_POST)) {
+            if($_POST['submit']=="Add to cart"){
+                checkLogin();
+            }else{
+                echo ("please login");
+            }
+        }    
+        
+    ?>
+    
 </head>
 
 <body>
@@ -45,15 +56,15 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-2">
-                                            <img src="./<?php echo $image; ?> " height="100" width="9
-                                            4
-                                            0">
+                                            <img src="./<?php echo $image; ?> " height="300" width="200">
                                         </div>
                                         <div class="col-lg-10">
                                             <p class="card-text"><?php echo $desc ?></p>
                                         </div>
                                     </div>
-                                    <a href="#" class="btn btn-primary float-right">Add to cart</a>
+                                    <form action="home.php" method="POST">
+                                    <input type="submit" value="Add to cart" name="submit">
+                                    </form>
                                     <b class="float-left"> Rs. <?php echo $price ?> </b>
                                 </div>
                             </div>

@@ -1,6 +1,12 @@
 <?php
-    include "middleware.php";
+    require_once "middleware.php";
     checkLogin();
+    require_once 'database.php';
+    require_once 'services.php';
+
+    $conn = connectDB();
+    $restaurant = getRestaurant($conn);
+    $restaurantId = $restaurant["id"];
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +24,7 @@
 <body>
     <div class="container">
         <div class="row">
+            <p class="h3 text-center"><?php echo $restaurant["name"] ?> </p>
             <div class="offset-lg-2 col-lg-8 border mt-2 mb-2">
                 <h2 class="text-center mb-2">Add Product</h2>
                 <form action="services.php" method="POST" enctype="multipart/form-data">
@@ -76,7 +83,7 @@
                         <label for="Image">Image</label>
                         <input type="file" class="form-control" name="image">
                     </div>
-                    <input type="hidden" name="restid" value="1">
+                    <input type="hidden" name="restid" value=<?php echo $restaurantId;?> >
                     <input class="form-group btn btn-primary" type="submit" name="submit" value="Add Product">
                 </form>
             </div>

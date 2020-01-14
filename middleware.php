@@ -22,7 +22,9 @@ function checkLogin() {
             }
         }
     } else {
-        if(!checkRoute("login")) {
+        if(checkRoute("register")) {
+            gotoRoute("register");
+        } else if(!checkRoute("login")) {
             gotoRoute("login");
         }
     }

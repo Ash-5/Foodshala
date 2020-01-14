@@ -1,6 +1,6 @@
 <?php
-    include "middleware.php";
-    checkLogin();
+    // require_once "middleware.php";
+    // checkLogin();
 ?>
 
 <!DOCTYPE html>

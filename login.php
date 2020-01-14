@@ -1,5 +1,5 @@
 <?php
-    include "middleware.php";
+    require_once "middleware.php";
     checkLogin();
 ?>
 

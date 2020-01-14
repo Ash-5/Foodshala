@@ -12,7 +12,15 @@ function gotoRoute($page) {
 
 function checkRoute($page) {
     $url = $_SERVER['REQUEST_URI'];
-    return strpos($url, $page) !== true;
+    return strpos($url, $page);
+}
+
+function getUIDBySessionId($conn) {
+    if(array_key_exists("sessionId", $_COOKIE)) {
+        $result = mysqli_fetch_assoc(mysqli_query($conn, "select user_id from session"));
+        return $result["user_id"];
+    }
+    return null;
 }
 
 ?>
